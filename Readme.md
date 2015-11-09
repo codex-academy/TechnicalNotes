@@ -26,6 +26,13 @@ Notes on things I learned & snippets of code that will make my life easier
 // how do I print to the console again?
 ```
 
+### How to do...?
+
+```javascript
+// how do to do
+```
+
+
 ### A note about something else
 add more here...
 
