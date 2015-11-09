@@ -8,6 +8,14 @@
 * How does a web application work?
 * Others?
 
+## Keep updated
+
+To ensure your fork have the latest changes from this repository.
+
+[Look at these instructions](https://help.github.com/articles/configuring-a-remote-for-a-fork/)
+
+You need to create an upstream repository for your fork.
+
 ## Notes
 
 Notes on things I learned & snippets of code that will make my life easier
