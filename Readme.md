@@ -1,4 +1,4 @@
-# My Technical Notes
+# Andre's Technical Notes
 
 ## Workshops
 
