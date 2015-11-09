@@ -1,4 +1,4 @@
-# Andre's Technical Notes
+# Technical Notes
 
 ## Workshops
 
@@ -40,4 +40,3 @@ add more here...
 
 * [Todo something useful](notes/my_file.md) A short description here
 * [Create a basic Express app](notes/my_file.md) How to get going with express
-* [Andre's link!!!](andre.md)
