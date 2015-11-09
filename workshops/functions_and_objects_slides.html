@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+Fairfull of the Ferry?
+
+---
+# What was hard?
+
+* Testing
+* Constructor functions / Classes
+* the `board` method - encapsulation
+* How to get going?
+* ?
+---
+# Testing
+
+* QUnit
+* Mocha
+* Which one to use?
+---
+# Mocha
+
+* DSL for Testing
+* DSL : `Domain Specific Language`
+
+** For example: **
+
+```javascript
+
+var assert = require("assert");
+
+describe("In the ferry kata ", function(){
+    it("I should be able to create cars", function(){
+        //Assemble
+        //Act
+        //Assert
+        assert.equal("car", "car");
+    });
+});
+```
+---
+
+# Constructor functions / Classes
+
+How to create a Car & Ferry!? :-|
+
+Let's look at functions...
+
+---
+
+# What is a function?
+
+* An operation that performs an action and returns the results.
+
+* An operation that takes parameters, perform an action using the parameters and then return a result.
+
+* can have a name
+
+---
+
+# Function examples
+
+> Create a function that takes a sentence and return the number of words in the sentence.
+
+Create the function like this:
+
+```javascript
+var wordCount = function(sentence){
+    if(!sentence){
+        return 0;
+    }
+    var wordsInSentence = sentence.split(" ");
+    return wordsInSentence.length;
+}
+```
+
+Call the function like this:
+
+```javascript
+var count = wordCount("The fox jumps over the fence");
+console.log(count);
+```
+---
+
+# Test it with Mocha:
+
+```javascript
+
+describe("The wordCount function", function(){
+    it("should return the number of words in the sentence", function(){
+        //Assemble & Act
+        var wordsInSentence = wordCount("The fox jumps over the fence");
+        //Assert
+        assert.equal(wordsInSentence, 6);
+    });
+});
+
+```
+
+---
+
+# Why are functions usefull?
+
+---
+
+# Why are functions usefull?
+
+ * Hide logic
+ * Call a piece of code over and over by name
+ * Write logic once & reuse
+
+---
+
+# Why are functions usefull?
+
+  * Hide logic
+  * Call a piece of code over and over by name
+  * Write logic once & reuse
+
+```javascript
+
+console.log(wordCount("How long is this sentence?"));
+
+console.log(wordCount("Is this sentence another length or what?"));
+
+console.log(wordCount("I am sure that this sentence is longer than the other ones?"));
+```
+
+---
+# Scope
+
+When variables are visible...
+
+In Javascript it's different!
+
+---
+# Function level scope
+
+Javascript have function level scope. This means variable scope is function wide and not specific to a block;
+
+```javascript
+    var myFunc = function(name){
+        var msg = "";
+        if (name.length > 10){
+            var length = name.length;
+            msg = "long";
+        }
+        else{
+            msg = "short";
+        }
+
+        //this variable will exists and will have a value some times!
+        console.log(length);
+
+        return msg;
+    };
+
+```
+
+---
+
+# Block level scope...
+
+Python have block level scope
+
+```python
+def myFunc (name):
+    msg = ""
+    if (len(name) > 10):
+        # length only exists in this block...
+        length = len(name)
+        msg = "long"
+    else:
+        msg = "short"
+
+    # this will not be initialized - this is always an error!
+    print length
+    return msg
+```
+---
+
+# Function level scope
+
+It's best practice in Javascript to declare all your variables on top
+
+```javascript
+    var myFunc = function(name){
+        //declare all variable on top
+        var msg = "";
+        var length = 0;
+        // all variable declared
+        if (name.length > 10){
+            length = name.length;
+            msg = "long";
+        }
+        else{
+            msg = "short";
+        }
+        //this now always have a value...
+        console.log(length);
+        return msg;
+    };
+
+```
+
+---
+
+
+# Higher order functions
+
+[More details here](http://eloquentjavascript.net/05_higher_order.html#h_xxCc98lOBK)
+
+Functions that can:
+* Take a function as a parameter
+* can return a function as a result
+
+---
+
+
+# Higher order functions
+
+[More details here](http://eloquentjavascript.net/05_higher_order.html#h_xxCc98lOBK)
+
+Functions that can:
+* Take a function as a parameter
+* can return a function as a result
+
+```javascript
+var removeShortWords = function(list){
+    var results = [];
+    for(var i=0;i<list.length;i++){
+        if(list[i].length > 5){
+            results.push(list[i]);
+        }
+    }
+    return results;
+}
+```
+---
+# Higher order functions
+
+Create a higher order function:
+
+```javascript
+var wordCount = function(sentence, filterFunc){
+    if(!sentence){
+        return 0;
+    }
+    var wordsInSentence = filterFunc(sentence.split(" "));
+    return wordsInSentence.length;
+}
+```
+
+Use it:
+
+```javascript
+
+wordCount("this is using higher order functions", removeShortWords)
+
+//or use an inline function
+wordCount("this is a using higher order functions and it is great!", function(words){
+    var results = [];
+    for(var i=0;i<list.length;i++){
+        if(list[i].indexOf("a") !== -1){
+            results.push(list[i]);
+        }
+    }
+    return results;
+});
+
+```
+
+---
+
+# When do we need functions?
+
+* Decide
+* Transform
+* Act
+
+> We when we want to remember / Keep state for longer. We need something more
+
+**State:**
+
+> The state of a digital logic circuit or computer program is a technical term for all the stored information, at a given instant in time, to which the circuit or program has access - `Wikipedia`
+
+---
+
+# Functions evolved...
+
+Create a function that takes a sentence and return the number of words in the sentence.
+
+And keeps track of the number of sentences and the total number of words it seen in the sentences it processed.
+
+**How do we do that?**
+
+What **state** do we need to keep?
+
+---
+
+# Functions evolved...
+
+** We can try this: **
+
+```javascript
+var totalWordCounter = 0;
+var totalSentenceCounter = 0;
+
+var currentSentenceLength = wordCount("How long is this sentence?");
+console.log(currentSentenceLength);
+totalSentenceCounter++;
+totalWordCounter += wordsInSentence.length;
+
+wordCount("Is this sentence another length or what?");
+console.log(currentSentenceLength);
+totalSentenceCounter++;
+totalWordCounter += wordsInSentence.length;
+
+wordCount("I am sure that this sentence is longer than the other ones?");
+console.log(currentSentenceLength);
+totalSentenceCounter++;
+totalWordCounter += wordsInSentence.length;
+
+console.log(totalSentenceCounter);
+console.log(totalWordCounter);
+
+```
+---
+
+# Functions evolved...
+
+This is messy!
+* Hard to understand
+* Lots of code
+* Lots of repitition
+
+**There should be a better way!**
+
+* Constructor functions: Class
+* Object Orientation : combine state & behaviour
+
+---
+
+# Classes
+
+Create an instance that encapsulate logic.
+
+> ** Encapsulation ** :
+    * hides internal state
+    * expose actions and attributes.
+
+```javascript
+
+// Constructor functions start with a Capital letter
+var WordCounter = function(){
+    this.totalSentenceCounter = 0;
+    this.totalWordCounter = 0;
+    this.countWords = function(sentence){
+        if(!sentence){
+            return 0;
+        }
+        var wordsInSentence = sentence.split(" ");
+        this.totalSentenceCounter++;
+        this.totalWordCounter += wordsInSentence.length;
+        return wordsInSentence.length;
+    }
+};
+
+```
+---
+
+# Classes
+
+Use it like this:
+
+```javascript
+    //create an instance using `new`
+    // using the new operator is very important
+    var myWordCounter = new WordCounter();
+    myWordCounter.countWords("How long is this sentence?");
+    myWordCounter.countWords("Is this sentence another length or what?");
+    myWordCounter.countWords("I am sure that this sentence is longer than the other ones?");
+
+    console.log(myWordCounter.totalSentenceCounter);
+    console.log(myWordCounter.totalWordCounter);
+
+    //create another instance
+    var yourWordCounter = new WordCounter();
+    yourWordCounter.countWords("Your sentence is something totally different");
+
+    console.log(yourWordCounter.totalSentenceCounter);
+    console.log(yourWordCounter.totalWordCounter);
+
+```
+---
+
+# Classes - constructor parameters:
+
+> Let's ignore sentences that is longer than a specified length.
+
+We can do that using a ** Constructor ** parameter.
+
+Give the object some runtime state to use.
+
+---
+
+# Classes - constructor parameters:
+
+Let's ignore sentences that is longer than a specified length.
+
+```javascript
+// Constructor functions start with a Capital letter
+var WordCounter = function(maxWords){
+    this.totalSentenceCounter = 0;
+    this.totalWordCounter = 0;
+    this.countWords = function(sentence){
+        if(!sentence) return 0;
+        var wordsInSentence = sentence.split(" ");
+
+        //ignore sentences that is longer than the specified length
+        if (wordsInSentence > maxWords) return 0;
+
+        this.totalSentenceCounter++;
+        this.totalWordCounter += wordsInSentence.length;
+        return wordsInSentence.length;
+    }
+};
+
+//if you use Node you can export from a module like this
+//module.exports = WordCounter
+
+```
+**Write a test for this change using Mocha...**
+
+---
+
+# Classes Factory function
+
+You can do the same thing without using `this` because Javascript have function level scope and support closures.
+
+[See more details here](http://ericleads.com/2013/01/javascript-constructor-functions-vs-factory-functions/)
+
+```javascript
+// Constructor functions start with a Capital letter
+var WordCounter = function(maxWords){
+    var totalSentenceCounter = 0;
+    var totalWordCounter = 0;
+    var countWords = function(sentence){
+        if(!sentence) return 0;
+        var wordsInSentence = sentence.split(" ");
+        //ignore sentences that is longer than the specified length
+        if (wordsInSentence > maxWords) return 0;
+        totalSentenceCounter++;
+        totalWordCounter += wordsInSentence.length;
+        return wordsInSentence.length;
+    };
+
+    return {
+        totalWordCounter : totalWordCounter,
+        totalSentenceCounter : totalSentenceCounter,
+        countWords : countWords
+    }
+};
+```
+---
+# Classes Factory function
+
+Instantiating with out `new` is fine now...
+
+```javascript
+    // the global namespace is save now...
+    var wordCounter = WordCounter(7);
+    wordCounter.countWords("How long is this sentence?");
+    console.log(wordCounter.totalWordCounter);
+```
+
+---
+
+# Summary
+
+* How to test - Mocha vs QUnit
+* Functions
+* State
+* Scope
+* Higher Order functions
+* Class / Constructor function
+* Object Orientation
+* Encapsulation - combine state & behaviour
+* Constructor functions
+* Factory functions
+
+---
+
+# Ferry Kata
+
+Go and do it again...
+
+</textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
