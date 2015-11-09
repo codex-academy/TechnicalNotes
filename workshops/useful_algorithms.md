@@ -5,7 +5,6 @@
 * How to group items in a list
 * How to sort items in a list
 * Control break - how to create sub totals easily
-* 
 
 ## Practicals
 
