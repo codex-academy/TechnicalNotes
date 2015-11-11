@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+#Smarty pants
+`find, filter, group, sort...`
+
+---
+# Basic algorithms
+
+--
+
+* find
+
+--
+
+* filter
+
+--
+
+* group
+
+--
+
+* sort
+
+--
+* control break
+--
+
+---
+# Variables
+
+---
+# State
+
+---
+# Data structures
+
+--
+
+`Data structured appropriately for the task at hand` - andré
+
+--
+* list
+* map
+--
+
+## In fact:
+
+* list of maps
+* map where the value is a list
+--
+
+```javascript
+var myStructure = {
+      key : {
+
+        keys : [],
+        otherKey : {
+            value : "oi!",
+            groups : []
+        }
+
+      }
+}
+```
+
+---
+# Simple algoritms
+
+A handfull that will serve you well...
+
+---
+# We have smarties...
+
+```javascript
+var smarties = [{ color : "white", qty : 8},
+    { color : "blue", qty : 13},
+    { color : "orange", qty : 17},
+    { color : "pink", qty : 3},
+    { color : "yellow", qty : 11},
+    { color : "blue", qty : 8},
+    { color : "red", qty : 11},
+    { color : "black", qty : 8},
+    { color : "yellow", qty : 11},
+    { color : "blue", qty : 8},
+    { color : "brown", qty : 19}];
+```
+
+---
+# Find
+
+--
+`How many orange smarties are there?`
+
+--
+
+Write a function:
+
+```javascript
+var orangeSmartie = find(smarties, "orange");
+
+console.log("Orange smarties qty : ", orangeSmartie.qty);
+```
+--
+## How do we do that?
+
+--
+
+* loop through the smarties
+
+--
+
+* check if the color match with the currentSmarty
+
+--
+
+* if it match
+
+--
+
+* return the currentSmarty
+
+---
+# Find...
+
+--
+`For which color do we have the most smarties?`
+
+--
+
+Write a function:
+
+```javascript
+var smarty = findMostOf(smarties);
+console.log("The color we have most of are : ", smarty.color);
+console.log("We have : ", smarty.qty);
+
+```
+---
+## Find...
+
+## How do we do that?
+
+--
+* create a empty smarty that looks like this (`this is state`)
+
+    `var bigSmarty = { name : '', qty : 0}`
+--
+
+* loop through the smarties
+
+--
+
+* check if: `currentSmarty.qty > bigSmarty.qty`
+
+--
+
+* if that's the case bigSmarty becomes currentSmarty
+
+--
+
+* once done with the loop return `bigSmarty`
+
+---
+# Filter
+
+`Find all the smarties we have less than 7 for`
+
+Filter :
+
+```javascript
+
+var filteredList = findSmartiesWithQtyLess(smarties, 7);
+
+console.log("There are " + filteredList.length " colors we have less than 7 smarties for" )
+
+```
+
+---
+
+# Filter...
+
+## How?
+--
+
+* Create an empty list called `smartyList`
+
+--
+
+* Loop through the list of smarties
+
+--
+
+* Check of the `currentSmarty.qty < 7`
+
+--
+
+* If so put the entry in `smartyList`
+
+--
+
+* Once looped through all the smarties return smartyList
+
+--
+
+* return `smartyList`
+
+---
+
+#Filter...
+
+We can create a smarter way of filtering. Using a filter function as an input.
+
+--
+
+```javascript
+    //find all smarties which color contains an 'e'
+    findSmarties(smarties, function(smarty){
+        return smarty.name.indexOf("e") !== -1;
+    });
+```
+
+--
+
+  or:
+
+--
+
+```javascript
+    //find all smarties which the qty is an even number
+    findSmarties(smarties, function(smarty){
+        return smarty.qty % 2 === 0;
+    });
+```
+--
+
+## Or what ever you can think of...
+
+---
+
+# Filter function...
+
+## How?
+--
+
+* Create an empty list called `smartyList`
+
+--
+
+* Loop through the list of smarties
+
+--
+
+* Call the filter function parameter with `currentSmarty` as the parameter
+
+--
+
+* If the filter functio returns true put currentSmarty in `smartyList`
+
+--
+
+* Once looped through all the smarties return `smartyList`
+
+--
+
+* return `smartyList`
+
+---
+
+# Grouping
+
+* Every thing we got so far was done on grouped smarties...
+
+--
+
+* How do we get all the smarties of the same color?
+
+--
+
+* We need to group them together...
+
+--
+
+* Which datastructure will work for this?
+
+--
+
+```javascript
+//list of smartier that looks like `{ color : 'green'}`
+var smarties = [];
+
+var groupedSmarties = groupSmarties(smarties);
+/*
+results in :
+groupedSmarties = {
+    "blue" : 9,
+    "orange" : 17,
+    "blue" : 3
+}
+*/
+// this prints 6
+console.log(groupedSmarties['blue']);
+```
+---
+# How to group
+
+--
+
+* Create an empty map/dictionary
+
+--
+
+* loop through all the smarties
+
+--
+
+* check in the map if there is a key for the current smarties color
+
+--
+
+* if not insert a key in the map for the color with a value of 0
+
+--
+
+* now get the entry for the current color and increment it by 1
+
+--
+
+* once looped through all the smarties the map will contain a key for each color of smarty & a qty for each
+
+--
+
+* now return the map from the function
+
+---
+# Sorting
+
+Given a list of smarties how can I sort them in ascending order?
+
+```javascript
+var smarties = [{ color : "white", qty : 8},
+    { color : "blue", qty : 11},
+    { color : "orange", qty : 17},
+    { color : "pink", qty : 3},
+    { color : "yellow", qty : 1},
+    { color : "red", qty : 11},
+    { color : "black", qty : 13},
+    { color : "yellow", qty : 11},
+    { color : "blue", qty : 19},
+    { color : "brown", qty : 15}];
+```
+
+--
+
+## How can we sort this list?
+
+
+---
+
+# Sorting algoritms
+
+There are various sorting algoritms:
+* Quick sort
+* Bubble sort
+* Insertion sort
+
+--
+
+We will focus on **Bubble Sort** as it's fairly easy to understand
+
+--
+
+Do remember that Javascript lists have a built in `sort` method.
+
+---
+
+# Bubble sort
+--
+
+* keep a counter for listSize
+
+--
+
+* loop through the list of smarties
+
+--
+
+* compare `currentSmarty.qty` with `nextSmarty.qty`
+--
+
+* if `currentSmarty.qty > nextSmarty.qty` swap currentSmart
+    and nextSmarty around in the list
+
+--
+
+* move to the next smarty in the list
+
+--
+
+* and keep on looping
+--
+
+* loop through the entire list again
+
+--
+
+* this time loop one counter less (decrement listSize by 1) as the biggest value would have filtered to the back of the list
+
+--
+
+* for each iteration the counter should be decremented until it is 0 at this point the loop will stop
+
+---
+
+# Control break
+
+How do we easily add totals into an existing list of sorted values
+
+```javascript
+var goals = [
+{ team : "Man U", goals : 1 },
+{ team : "Man U", goals : 2 },
+{ team : "Man U", goals : 1 },
+// { team : "Man U", total : 4 }, how to add this line **
+{ team : "Arsenal", goals : 1 },
+{ team : "Arsenal", goals : 1 },
+{ team : "Arsenal", goals : 3 },
+{ team : "Chelsea", goals : 0 },
+{ team : "Chelsea", goals : 1 },
+{ team : "Chelsea", goals : 0 }]
+
+```
+
+---
+
+#Control break
+
+* create a new list
+
+* initialize a key value to the first value of the field the list is ordered on
+
+* loop through the ordered list
+
+* run a total that you keep on incrementing using the field you would like to have a total for
+
+* check if the key field has changed
+
+* if the field the key field has changed:
+    * print the total / add it to the list
+    * then reset the total to 0
+    * set the key to the new value
+
+* otherwise add the existing line to the list
+
+* keep on looping until the list is done.
+
+* return the list
+
+---
+
+</textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
