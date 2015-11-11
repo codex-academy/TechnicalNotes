@@ -1,27 +1,27 @@
-test("how many orange smarties do we have?", function(assert){
+var findSmartiesByColor = function(){
 
-});
+};
 
-test("find color of smarties we have the most of", function(assert){
+var findMostAbundantSmartie = function(smarties){
 
-});
+};
 
-test("find all the smarties we have less than 7 for", function(assert){
+var findSmartiesLessThan = function(){
 
-});
+};
 
-test("can I search smarties using a function", function(assert){
+var findSmarties = function(){
 
-});
+};
 
-test("can I group smarties", function(assert){
+var groupSmarties = function(){
 
-});
+};
 
-test("can I sort smarties", function(assert){
+var sortSmarties = function(){
 
-});
+};
 
-test("can I do an control break?", function(assert){
+var addTotalForTeams = function(){
 
-});
+};
