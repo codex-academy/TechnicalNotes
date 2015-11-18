@@ -31,16 +31,15 @@ test("find all the smarties we have less than 7 for", function(assert){
 });
 
 test("can I search smarties using a function", function(assert){
-    assert.equal(true, false);
 
-    var smarties = findSmarties(smarties, function(smarty){
+    var smartieList = findSmarties(smarties, function(smarty){
         return smarty.qty % 2 === 0;
     });
 
-    assert.deepEqual(smarties, {
-        pink : 6,
-        yellow : 10
-    })
+    assert.deepEqual(smartieList, [
+	    { color : "pink", qty : 6},
+    	    { color : "yellow", qty : 10}
+	])
 
 });
 
