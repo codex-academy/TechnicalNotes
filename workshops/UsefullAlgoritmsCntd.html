@@ -28,23 +28,15 @@
 
 class: center, middle
 
-#Smarty pants
+#Smarty pants cntd.
 `find, filter, group, sort...`
 
 ---
-# Basic algorithms
+# More algorithms
 
 --
 
-* find
-
---
-
-* filter
-
---
-
-* group
+* filter using high order functions
 
 --
 
@@ -56,13 +48,6 @@ class: center, middle
 
 ---
 
-# Smartie pants
-
-* Create an smartie arrow with 10 smarties
-* that points up having a base of 4 smarties
-* move **only** 3 smarties to point the arrow downloads
-
----
 # Variables
 
 ---
@@ -87,164 +72,48 @@ class: center, middle
 --
 
 ```javascript
-var myStructure = {
-      key : {
-
-        keys : [],
-        otherKey : {
-            value : "oi!",
-            groups : []
-        }
-
-      }
-}
-```
-
----
-# Simple algoritms
-
-A handfull that will serve you well...
-
----
-# We have smarties...
-
-```javascript
-var smarties = [
-    { color : "white", qty : 8},
-    { color : "blue", qty : 13},
-    { color : "orange", qty : 17},
-    { color : "pink", qty : 3},
-    { color : "red", qty : 11},
-    { color : "black", qty : 8},
-    { color : "yellow", qty : 11},
-    { color : "brown", qty : 19}];
-```
-
----
-# Find
-
---
-`How many orange smarties are there?`
-
---
-
-Write a function:
-
-```javascript
-var orangeSmartie = find(smarties, "orange");
-
-console.log("Orange smarties qty : ", orangeSmartie.qty);
-```
---
-## How do we do that?
-
---
-
-* loop through the smarties
-
---
-
-* check if the color match with the currentSmarty
-
---
-
-* if it match
-
---
-
-* return the currentSmarty
-
----
-# Find...
-
---
-
-`For which color do we have the most smarties?`
-
---
-
-Write a function:
-
-```javascript
-var smarty = findMostOf(smarties);
-console.log("The color we have most of are : ", smarty.color);
-console.log("We have : ", smarty.qty);
-
-```
----
-## Find...
-
-## How do we do that?
-
---
-* create a empty smarty that looks like this (`this is state`)
-
-    `var bigSmarty = { name : '', qty : 0}`
---
-
-* loop through the smarties
-
---
-
-* check if: `currentSmarty.qty > bigSmarty.qty`
-
---
-
-* if that's the case bigSmarty becomes currentSmarty
-
---
-
-* once done with the loop return `bigSmarty`
-
----
-# Filter
-
-`Find all the smarties we have less than 7 of`
-
-Filter :
-
-```javascript
-
-var filteredList = findSmartiesWithQtyLess(smarties, 7);
-
-console.log("There are " + filteredList.length " colors we have less than 7 smarties for" )
-
+var mall = {
+      restuarants : {
+          fastfood : ['kfc', 'steers', 'mcdonalds']
+      },
+      supermarkets : []'pick_n_pay', 'checkers', 'woolworths'],
+      toyshops : ['regies', 'toy barn']
+}a
 ```
 
 ---
 
-# Filter...
+# Let's now find...
 
-## How?
---
+`Find all the smarties who's colors length is less than 5`
 
-* Create an empty list called `smartyList`
+or
 
---
+`Find all the smarties who's colors length is longer than 7`
 
-* Loop through the list of smarties
+or
 
---
+`Find all the smartie color we have multiples of 2`
 
-* Check of the `currentSmarty.qty < 7`
+or
 
---
+`Find all the smartie color we have multiples of 7`
 
-* If so put the entry in `smartyList`
+or
 
---
-
-* Once looped through all the smarties return smartyList
-
---
-
-* return `smartyList`
+`...?!`
 
 ---
 
-#Filter...
+#Filter using Higher order functions
 
-We can create a smarter way of filtering. Using a filter function as an input.
+We can create a smarter way of filtering. Using a higher order functions.
+
+--
+
+Higher order functions can:
+* Take a function as a parameter
+* can return a function as a result
 
 --
 
@@ -273,7 +142,7 @@ We can create a smarter way of filtering. Using a filter function as an input.
 
 ---
 
-# Filter function...
+# Filter using high order functions
 
 ## How?
 --
@@ -290,7 +159,7 @@ We can create a smarter way of filtering. Using a filter function as an input.
 
 --
 
-* If the filter functio returns true put currentSmarty in `smartyList`
+* If the filter function returns true put currentSmarty in `smartyList`
 
 --
 
@@ -301,80 +170,9 @@ We can create a smarter way of filtering. Using a filter function as an input.
 * return `smartyList`
 
 ---
-
-# Grouping
-
-* Every thing we got so far was done on grouped smarties...
-
---
-
-* How do we get all the smarties of the same color?
-
---
-
-* We need to group them together...
-
---
-
-* Which datastructure will work for this?
-
---
-
-```javascript
-//list of smartier that looks like `{ color : 'green'}`
-var smarties = [];
-
-var groupedSmarties = groupSmarties(smarties);
-/*
-results in :
-groupedSmarties = {
-    "blue" : 9,
-    "orange" : 17,
-    "blue" : 3
-}
-*/
-// this prints 6
-console.log(groupedSmarties['blue']);
-```
----
-# How to group
-
---
-
-* Create an empty map/dictionary
-
---
-
-* loop through all the smarties
-
---
-
-*  get the current smartie
-
---
-
-* check in the map if there is a key for the current smarties color
-
---
-
-* if not insert a key in the map for the color with a value of 0
-
---
-
-* now get the entry for the current color and increment it by 1
-
---
-
-* once looped through all the smarties the map will contain a key for each color of smarty & a qty for each
-
---
-
-* now return the map from the function
-
----
 # Sorting
 
-Given a list of smarties how can I sort them in ascending order?
+Given a list of smarties how can I sort them in ascending order of qty?
 
 ```javascript
 var smarties = [{ color : "white", qty : 8},
@@ -393,6 +191,30 @@ var smarties = [{ color : "white", qty : 8},
 
 ## How can we sort this list?
 
+---
+
+# How to sort
+
+Javascript lists got a built in sort function.
+
+```javascript
+
+smarties.sort(function(s1, s2){
+
+  // if < return -1
+  // if equal return 0
+  // if > return 1
+  return s1.qty - s2.qty;
+
+});
+
+```
+
+But...
+
+--
+
+We need to understand how sorting works
 
 ---
 
@@ -420,11 +242,16 @@ Do remember that Javascript lists have a built in `sort` method.
 
 --
 
-* loop through the list of smarties
+* loop through the current listSize
+
+--
+
+* loop through the list of smarties for the current listSize
 
 --
 
 * compare `currentSmarty.qty` with `nextSmarty.qty`
+
 --
 
 * if `currentSmarty.qty > nextSmarty.qty` swap currentSmart
@@ -464,9 +291,12 @@ var goals = [
 { team : "Arsenal", goals : 1 },
 { team : "Arsenal", goals : 1 },
 { team : "Arsenal", goals : 3 },
+// { team : "Arsenal", total : 5 }, how to add this line **
 { team : "Chelsea", goals : 0 },
 { team : "Chelsea", goals : 1 },
-{ team : "Chelsea", goals : 0 }]
+{ team : "Chelsea", goals : 0 },
+// { team : "", total : 4 }, how to add this line **
+]
 
 ```
 
@@ -476,22 +306,38 @@ var goals = [
 
 * create a new list
 
+--
+
 * initialize a key value to the first value of the field the list is ordered on
+
+--
 
 * loop through the ordered list
 
+--
+
 * run a total that you keep on incrementing using the field you would like to have a total for
 
+--
+
 * check if the key field has changed
+
+--
 
 * if the field the key field has changed:
     * print the total / add it to the list
     * then reset the total to 0
     * set the key to the new value
 
+--
+
 * otherwise add the existing line to the list
 
+--
+
 * keep on looping until the list is done.
+
+--
 
 * return the list
 
