@@ -65,6 +65,22 @@ test("can I sort smarties", function(assert){
 });
 
 test("can I do an control break?", function(assert){
-    addTotalForTeams()
-    assert.equal(true, false);
+    var goals = [
+        { team : "Man U", goals : 1 },
+        { team : "Man U", goals : 2 },
+        { team : "Man U", goals : 1 },
+        { team : "Arsenal", goals : 1 },
+        { team : "Arsenal", goals : 1 },
+        { team : "Arsenal", goals : 3 },
+        { team : "Chelsea", goals : 0 },
+        { team : "Chelsea", goals : 1 },
+        { team : "Chelsea", goals : 0 },
+    ];
+
+    var teamsWithTotal = addTotalForTeams(goals);
+
+    assert.deepEqual(teamsWithTotal[3], { team : "Man U", total : 4 });
+    assert.deepEqual(teamsWithTotal[7], { team : "Arsenal", total : 5 });
+    assert.deepEqual(teamsWithTotal[3], { team : "Chelsea", total : 1 });
+
 });
